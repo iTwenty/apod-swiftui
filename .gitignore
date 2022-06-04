@@ -91,3 +91,6 @@ iOSInjectionProject/
 
 # macOS files to ignore
 .DS_Store
+
+# Ignore secrets.plist
+apod-swiftui/secrets.plist

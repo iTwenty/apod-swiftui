@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct ApodApp: App {
+
+    init() {
+        Secrets.load()
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            DailyView()
         }
     }
 }
