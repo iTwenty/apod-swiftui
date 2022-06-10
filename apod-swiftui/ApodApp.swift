@@ -16,7 +16,7 @@ struct ApodApp: App {
 
     var body: some Scene {
         WindowGroup {
-            DailyView()
+            HomeView()
         }
     }
 }

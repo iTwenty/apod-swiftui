@@ -8,24 +8,46 @@
 import Foundation
 import SwiftUI
 
-struct PageView<Data, Page: View>: UIViewControllerRepresentable {
-    let initialData: Data
-    @ViewBuilder let pageBuilder: (Data) -> Page
+enum PageDirection {
+    case forward
+    case reverse
+    case direct
+}
+
+struct PageView<Data: Comparable, Page: View>: UIViewControllerRepresentable {
+    @Binding var data: Data
+    @ViewBuilder let pageBuilder: (Data, PageDirection) -> Page
     let before: (Data) -> Data?
     let after: (Data) -> Data?
+    let onPageChange: ((Data) -> ())?
 
     func makeUIViewController(context: Context) -> UIPageViewController {
         let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-        let initialVc = PageViewController(data: initialData, rootView: pageBuilder(initialData))
+        let initialVc = PageViewController(data: data, rootView: pageBuilder(data, .reverse))
         vc.setViewControllers([initialVc], direction: .reverse, animated: false)
         vc.dataSource = context.coordinator
+        vc.delegate = context.coordinator
         return vc
     }
 
-    func updateUIViewController(_ vc: UIPageViewController, context: Context) { }
+    func updateUIViewController(_ vc: UIPageViewController, context: Context) {
+        guard !context.coordinator.ignoreUpdate else {
+            context.coordinator.ignoreUpdate = false
+            return
+        }
+        guard let currentData = (vc.viewControllers?.first as? PageViewController<Data, Page>)?.data else {
+            return
+        }
+        if currentData == data {
+            return
+        }
+        let direction: UIPageViewController.NavigationDirection = currentData > data ? .reverse : .forward
+        let initialVc = PageViewController(data: data, rootView: pageBuilder(data, .direct))
+        vc.setViewControllers([initialVc], direction: direction, animated: true)
+    }
 
     func makeCoordinator() -> PageViewCoordinator<Data, Page> {
-        PageViewCoordinator(pageBuilder: pageBuilder, before: before, after: after)
+        PageViewCoordinator(self)
     }
 }
 
@@ -42,17 +64,12 @@ private class PageViewController<Data, Page: View>: UIHostingController<Page> {
     }
 }
 
-class PageViewCoordinator<Data, Page: View>: NSObject, UIPageViewControllerDataSource {
-    private let pageBuilder:  (Data) -> Page
-    private let before: (Data) -> Data?
-    private let after: (Data) -> Data?
+class PageViewCoordinator<Data: Comparable, Page: View>: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    private var pageView: PageView<Data, Page>
+    var ignoreUpdate = false
 
-    init(pageBuilder: @escaping (Data) -> Page,
-         before: @escaping (Data) -> Data?,
-         after: @escaping (Data) -> Data?) {
-        self.pageBuilder = pageBuilder
-        self.before = before
-        self.after = after
+    init(_ pageView: PageView<Data, Page>) {
+        self.pageView = pageView
     }
 
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -61,11 +78,11 @@ class PageViewCoordinator<Data, Page: View>: NSObject, UIPageViewControllerDataS
             return nil
         }
 
-        guard let beforeData = self.before(currentData) else {
+        guard let beforeData = pageView.before(currentData) else {
             return nil
         }
 
-        return PageViewController(data: beforeData, rootView: pageBuilder(beforeData))
+        return PageViewController(data: beforeData, rootView: pageView.pageBuilder(beforeData, .reverse))
     }
 
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -74,10 +91,22 @@ class PageViewCoordinator<Data, Page: View>: NSObject, UIPageViewControllerDataS
             return nil
         }
 
-        guard let afterData = self.after(currentData) else {
+        guard let afterData = pageView.after(currentData) else {
             return nil
         }
 
-        return PageViewController(data: afterData, rootView: pageBuilder(afterData))
+        return PageViewController(data: afterData, rootView: pageView.pageBuilder(afterData, .forward))
+    }
+
+    func pageViewController(_ pageViewController: UIPageViewController,
+                            didFinishAnimating finished: Bool,
+                            previousViewControllers: [UIViewController],
+                            transitionCompleted completed: Bool) {
+        guard let currentData = (pageViewController.viewControllers?.first as? PageViewController<Data, Page>)?.data else {
+            return
+        }
+        ignoreUpdate = true
+        pageView.data = currentData
+        pageView.onPageChange?(currentData)
     }
 }

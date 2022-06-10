@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct ApodView: View {
     let date: Date
+    let direction: PageDirection
     @ObservedObject var vm: DailyVM
 
     var body: some View {
@@ -17,13 +19,28 @@ struct ApodView: View {
             case .fetching:
                 ProgressView()
             case .success(let apod):
-                Text(apod.title)
+                successView(apod).padding()
             case .failure(let error):
                 Text(error.localizedDescription)
             }
         } else {
             ProgressView().onAppear {
-                vm.fetchApod(forDate: date)
+                vm.fetchApod(forDate: date, direction: direction)
+            }
+        }
+    }
+
+    @ViewBuilder private func successView(_ apod: Apod) -> some View {
+        ScrollView([.vertical], showsIndicators: false) {
+            VStack {
+                LazyImage(source: apod.url) { state in
+                    state.image?.aspectRatio(contentMode: .fit)
+                        .cornerRadius(6)
+                        .shadow(radius: 3)
+                }
+                Text(apod.title).font(.title)
+                Spacer().frame(height: 16)
+                Text(apod.explanation)
             }
         }
     }
@@ -31,6 +48,6 @@ struct ApodView: View {
 
 struct ApodView_Previews: PreviewProvider {
     static var previews: some View {
-        ApodView(date: Date.now, vm: DailyVM())
+        ApodView(date: Date.now, direction: .direct, vm: DailyVM())
     }
 }
