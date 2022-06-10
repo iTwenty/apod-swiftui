@@ -67,6 +67,7 @@ class ApodDataManager {
 
     private func fetchApod(fetchType: FetchType, localOnly: Bool) async throws -> Apod {
         do {
+            print("fetchApod \(fetchType)")
             return try await apodStorage.fetchApod(date: fetchType.date)
         } catch ApodLocalError.noApodError {
             if localOnly {

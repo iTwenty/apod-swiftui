@@ -17,12 +17,13 @@ enum ApodFetchStatus {
     private let apodDataManager = ApodDataManager()
     @Published var apods = [Date: ApodFetchStatus]()
 
-    func fetchApod(forDate date: Date) {
+    func fetchApod(forDate date: Date, direction: PageDirection) {
         if apods[date] == nil {
             Task {
                 do {
                     apods[date] = .fetching
-                    let apod = try await apodDataManager.fetchApod(fetchType: .before(date: date))
+                    let fetchType = fetchType(date: date, direction: direction)
+                    let apod = try await apodDataManager.fetchApod(fetchType: fetchType)
                     apods[date] = .success(apod)
                 } catch {
                     apods[date] = .failure(error)
@@ -49,11 +50,19 @@ enum ApodFetchStatus {
             return nil
         }
 
-        let comparison = Constants.Calendars.apodCalendar.compare(afterDate, to: Date.now, toGranularity: .day)
+        let comparison = Constants.Calendars.apodCalendar.compare(afterDate, to: Constants.Dates.startOfDay, toGranularity: .day)
         guard comparison == .orderedSame || comparison == .orderedAscending else {
             return nil
         }
 
         return afterDate
+    }
+
+    private func fetchType(date: Date, direction: PageDirection) -> FetchType {
+        switch direction {
+        case .forward: return .after(date: date)
+        case .reverse: return .before(date: date)
+        case .direct: return .middle(date: date)
+        }
     }
 }

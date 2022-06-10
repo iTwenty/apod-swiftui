@@ -12,6 +12,8 @@
 		C07F3139284B90CF00BF2473 /* ApodDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07F3138284B90CF00BF2473 /* ApodDataManager.swift */; };
 		C07F313B284BB3B800BF2473 /* secrets.plist in Resources */ = {isa = PBXBuildFile; fileRef = C07F313A284BB3B800BF2473 /* secrets.plist */; };
 		C07F313D284BB4D900BF2473 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07F313C284BB4D900BF2473 /* Secrets.swift */; };
+		C07F3143284BC8B200BF2473 /* NukeUI in Frameworks */ = {isa = PBXBuildFile; productRef = C07F3142284BC8B200BF2473 /* NukeUI */; };
+		C07F3147284FA27000BF2473 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07F3146284FA27000BF2473 /* HomeView.swift */; };
 		C0D1308427B91FBE003BD124 /* ApodStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1308327B91FBE003BD124 /* ApodStorage.swift */; };
 		C0D1308627B9206F003BD124 /* SqliteDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1308527B9206F003BD124 /* SqliteDb.swift */; };
 		C0D1308827B9283E003BD124 /* ApodLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1308727B9283E003BD124 /* ApodLocalStorage.swift */; };
@@ -53,6 +55,7 @@
 		C07F3138284B90CF00BF2473 /* ApodDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodDataManager.swift; sourceTree = "<group>"; };
 		C07F313A284BB3B800BF2473 /* secrets.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = secrets.plist; sourceTree = "<group>"; };
 		C07F313C284BB4D900BF2473 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		C07F3146284FA27000BF2473 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C0D1308327B91FBE003BD124 /* ApodStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodStorage.swift; sourceTree = "<group>"; };
 		C0D1308527B9206F003BD124 /* SqliteDb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteDb.swift; sourceTree = "<group>"; };
 		C0D1308727B9283E003BD124 /* ApodLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodLocalStorage.swift; sourceTree = "<group>"; };
@@ -79,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C07F3143284BC8B200BF2473 /* NukeUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +129,22 @@
 			path = vms;
 			sourceTree = "<group>";
 		};
+		C07F3144284FA24900BF2473 /* home */ = {
+			isa = PBXGroup;
+			children = (
+				C07F3145284FA26000BF2473 /* views */,
+			);
+			path = home;
+			sourceTree = "<group>";
+		};
+		C07F3145284FA26000BF2473 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				C07F3146284FA27000BF2473 /* HomeView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		C0E3F88B27CE42770046A408 /* views */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,6 +176,7 @@
 		C0FE2CA127AFACDE000D35C2 /* apod-swiftui */ = {
 			isa = PBXGroup;
 			children = (
+				C07F3144284FA24900BF2473 /* home */,
 				C07F3133284B74DD00BF2473 /* daily */,
 				C0E3F88B27CE42770046A408 /* views */,
 				C0FE2CD427AFBB06000D35C2 /* utilities */,
@@ -241,6 +262,9 @@
 			dependencies = (
 			);
 			name = "apod-swiftui";
+			packageProductDependencies = (
+				C07F3142284BC8B200BF2473 /* NukeUI */,
+			);
 			productName = "apod-swiftui";
 			productReference = C0FE2C9F27AFACDE000D35C2 /* apod-swiftui.app */;
 			productType = "com.apple.product-type.application";
@@ -313,6 +337,9 @@
 				Base,
 			);
 			mainGroup = C0FE2C9627AFACDE000D35C2;
+			packageReferences = (
+				C07F3141284BC8B200BF2473 /* XCRemoteSwiftPackageReference "NukeUI" */,
+			);
 			productRefGroup = C0FE2CA027AFACDE000D35C2 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -369,6 +396,7 @@
 				C0658E632847C5CB0017FB65 /* ApodView.swift in Sources */,
 				C0FE2CCF27AFB954000D35C2 /* ApodFetcher.swift in Sources */,
 				C07F3139284B90CF00BF2473 /* ApodDataManager.swift in Sources */,
+				C07F3147284FA27000BF2473 /* HomeView.swift in Sources */,
 				C0FE2CDA27AFBE4E000D35C2 /* ApodApiFetcher.swift in Sources */,
 				C0D1308827B9283E003BD124 /* ApodLocalStorage.swift in Sources */,
 			);
@@ -699,6 +727,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C07F3141284BC8B200BF2473 /* XCRemoteSwiftPackageReference "NukeUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/NukeUI";
+			requirement = {
+				kind = exactVersion;
+				version = 0.8.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C07F3142284BC8B200BF2473 /* NukeUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C07F3141284BC8B200BF2473 /* XCRemoteSwiftPackageReference "NukeUI" */;
+			productName = NukeUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0FE2C9727AFACDE000D35C2 /* Project object */;
 }

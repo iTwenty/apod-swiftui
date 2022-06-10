@@ -36,6 +36,12 @@ struct Constants {
     }
 
     struct Dates {
+        static let startOfDay: Date = {
+            let date = Date()
+            let cal = Constants.Calendars.apodCalendar
+            return cal.startOfDay(for: date)
+        }()
+
         static let apodLaunchDate: Date = {
             var components = DateComponents()
             components.year = 1995
