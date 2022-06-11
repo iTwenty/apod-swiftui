@@ -17,6 +17,7 @@ fileprivate struct DbInfo {
         static let col_explanation = "explanation"
         static let col_hdurl = "hdurl"
         static let col_url = "url"
+        static let col_thumbnailUrl = "thumbnailUrl"
         static let col_mediaType = "mediaType"
         static let col_title = "title"
     }
@@ -48,8 +49,9 @@ INSERT OR IGNORE INTO \(DbInfo.TableApods.name)
 \(DbInfo.TableApods.col_explanation),
 \(DbInfo.TableApods.col_url),
 \(DbInfo.TableApods.col_hdurl),
+\(DbInfo.TableApods.col_thumbnailUrl),
 \(DbInfo.TableApods.col_copyright))
-VALUES (?, ?, ?, ?, ?, ?, ?)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?)
 """
             let params: [Any?] = [apod.date.apodApiFormatted(),
                                   apod.title,
@@ -57,6 +59,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?)
                                   apod.explanation,
                                   apod.url.absoluteString,
                                   apod.hdurl?.absoluteString,
+                                  apod.thumbnailUrl?.absoluteString,
                                   apod.copyright]
             try await db.insert(insertString: insertQuery, parameters: params)
         }
@@ -136,8 +139,10 @@ DELETE FROM \(DbInfo.TableFavApods.name) WHERE \(DbInfo.TableFavApods.col_apod_d
               }
         let copyright = row[DbInfo.TableApods.col_copyright] as? String
         let hdurl = URL(string: row[DbInfo.TableApods.col_hdurl] as? String ?? "")
+        let thumbnailUrl = URL(string: row[DbInfo.TableApods.col_thumbnailUrl] as? String ?? "")
         return Apod(copyright: copyright, date: date, explanation: explanation,
-                    hdurl: hdurl, url: url, mediaType: mediaType, title: title)
+                    hdurl: hdurl, thumbnailUrl: thumbnailUrl, url: url,
+                    mediaType: mediaType, title: title)
     }
 
     static func createQueries() -> [String] {
@@ -151,7 +156,8 @@ CREATE TABLE \(DbInfo.TableApods.name) (
 \(DbInfo.TableApods.col_url) TEXT NOT NULL,
 \(DbInfo.TableApods.col_mediaType) TEXT NOT NULL,
 \(DbInfo.TableApods.col_copyright) TEXT,
-\(DbInfo.TableApods.col_hdurl) TEXT)
+\(DbInfo.TableApods.col_hdurl) TEXT,
+\(DbInfo.TableApods.col_thumbnailUrl) TEXT)
 """
 
         let createTableFavApodsQuery = """
