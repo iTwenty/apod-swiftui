@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C04A81172853AACC0093E4D9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04A81162853AACC0093E4D9 /* SettingsView.swift */; };
 		C0658E632847C5CB0017FB65 /* ApodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0658E622847C5CB0017FB65 /* ApodView.swift */; };
 		C07F3137284B758700BF2473 /* DailyVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07F3136284B758700BF2473 /* DailyVM.swift */; };
 		C07F3139284B90CF00BF2473 /* ApodDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07F3138284B90CF00BF2473 /* ApodDataManager.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C04A81162853AACC0093E4D9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C0658E622847C5CB0017FB65 /* ApodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodView.swift; sourceTree = "<group>"; };
 		C07F3136284B758700BF2473 /* DailyVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyVM.swift; sourceTree = "<group>"; };
 		C07F3138284B90CF00BF2473 /* ApodDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodDataManager.swift; sourceTree = "<group>"; };
@@ -103,6 +105,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C04A81142853AAB20093E4D9 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				C04A81152853AABD0093E4D9 /* views */,
+			);
+			path = settings;
+			sourceTree = "<group>";
+		};
+		C04A81152853AABD0093E4D9 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				C04A81162853AACC0093E4D9 /* SettingsView.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
 		C07F3133284B74DD00BF2473 /* daily */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +196,7 @@
 			children = (
 				C07F3144284FA24900BF2473 /* home */,
 				C07F3133284B74DD00BF2473 /* daily */,
+				C04A81142853AAB20093E4D9 /* settings */,
 				C0E3F88B27CE42770046A408 /* views */,
 				C0FE2CD427AFBB06000D35C2 /* utilities */,
 				C0FE2CD127AFBABD000D35C2 /* entities */,
@@ -388,6 +407,7 @@
 				C07F3137284B758700BF2473 /* DailyVM.swift in Sources */,
 				C0FE2CD827AFBB54000D35C2 /* Extensions.swift in Sources */,
 				C0E3F88D27CE42FF0046A408 /* PageView.swift in Sources */,
+				C04A81172853AACC0093E4D9 /* SettingsView.swift in Sources */,
 				C0D1308627B9206F003BD124 /* SqliteDb.swift in Sources */,
 				C0FE2CA527AFACDE000D35C2 /* DailyView.swift in Sources */,
 				C0FE2CD327AFBAC8000D35C2 /* Apod.swift in Sources */,

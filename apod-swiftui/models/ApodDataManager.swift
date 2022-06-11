@@ -70,10 +70,13 @@ class ApodDataManager {
             print("fetchApod \(fetchType)")
             return try await apodStorage.fetchApod(date: fetchType.date)
         } catch ApodLocalError.noApodError {
+            print("Apod not found locally")
             if localOnly {
+                print("fetch was localOnly, but no apod found locally. Aborting")
                 throw ApodLocalError.noApodError
             }
             try await fetchApodsFromApi(fetchType: fetchType)
+            print("fetch again with localOnly flag")
             return try await fetchApod(fetchType: fetchType, localOnly: true)
         }
     }
@@ -82,7 +85,9 @@ class ApodDataManager {
         guard let range = fetchType.range else {
             throw "Could not calculate valid date range for \(fetchType)"
         }
+        print("fetching apod from api")
         let apods = try await apodFetcher.fetchApods(from: range.start, to: range.end)
+        print("fetched apod from api. Saving to local db")
         try await apodStorage.insertApods(apods)
     }
 }
