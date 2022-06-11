@@ -33,10 +33,7 @@ struct ApodView: View {
     @ViewBuilder private func successView(_ apod: Apod) -> some View {
         ScrollView([.vertical], showsIndicators: false) {
             VStack {
-                LazyImage(source: apod.url)
-                    .frame(height: 300)
-                    .cornerRadius(6)
-                    .shadow(radius: 3)
+                ApodMediaView(apod: apod)
                 Text(apod.title).font(.title)
                 Spacer().frame(height: 16)
                 Text(apod.explanation)

@@ -48,7 +48,8 @@ final actor ApodApiFetcher: ApodFetcher {
 
         let queryItems = [URLQueryItem(name: "api_key", value: Secrets.apodApiKey),
                           URLQueryItem(name: "start_date", value: from.apodApiFormatted()),
-                          URLQueryItem(name: "end_date", value: to.apodApiFormatted())]
+                          URLQueryItem(name: "end_date", value: to.apodApiFormatted()),
+                          URLQueryItem(name: "thumbs", value: "True")]
         urlComponents.queryItems = queryItems
 
         guard let url = urlComponents.url else {
