@@ -54,9 +54,12 @@ struct DailyView: View {
                     showDatePicker = false
                 }
             }.padding()
-            DatePicker(selection: $tmpDate, in: Constants.Dates.apodLaunchDate...Constants.Dates.startOfDay, displayedComponents: [.date]) {
+            let range = Constants.Dates.apodLaunchDate...Constants.Dates.startOfDay
+            DatePicker(selection: $tmpDate, in: range, displayedComponents: [.date]) {
                 Text(date.displayFormatted())
-            }.datePickerStyle(.graphical)
+            }
+            .environment(\.timeZone, Constants.Calendars.apodCalendar.timeZone)
+            .datePickerStyle(.graphical)
         }
     }
 }
