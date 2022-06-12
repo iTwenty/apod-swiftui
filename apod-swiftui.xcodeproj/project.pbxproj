@@ -10,6 +10,7 @@
 		C04A81172853AACC0093E4D9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04A81162853AACC0093E4D9 /* SettingsView.swift */; };
 		C04A81192854E9320093E4D9 /* ApodMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04A81182854E9320093E4D9 /* ApodMediaView.swift */; };
 		C04A811C2854EA0B0093E4D9 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = C04A811B2854EA0B0093E4D9 /* YouTubePlayerKit */; };
+		C04A811E2855D8B90093E4D9 /* ApodVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04A811D2855D8B90093E4D9 /* ApodVideoView.swift */; };
 		C0658E632847C5CB0017FB65 /* ApodView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0658E622847C5CB0017FB65 /* ApodView.swift */; };
 		C07F3137284B758700BF2473 /* DailyVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07F3136284B758700BF2473 /* DailyVM.swift */; };
 		C07F3139284B90CF00BF2473 /* ApodDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07F3138284B90CF00BF2473 /* ApodDataManager.swift */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		C04A81162853AACC0093E4D9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C04A81182854E9320093E4D9 /* ApodMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodMediaView.swift; sourceTree = "<group>"; };
+		C04A811D2855D8B90093E4D9 /* ApodVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodVideoView.swift; sourceTree = "<group>"; };
 		C0658E622847C5CB0017FB65 /* ApodView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodView.swift; sourceTree = "<group>"; };
 		C07F3136284B758700BF2473 /* DailyVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyVM.swift; sourceTree = "<group>"; };
 		C07F3138284B90CF00BF2473 /* ApodDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodDataManager.swift; sourceTree = "<group>"; };
@@ -172,6 +174,7 @@
 			children = (
 				C0E3F88C27CE42FF0046A408 /* PageView.swift */,
 				C04A81182854E9320093E4D9 /* ApodMediaView.swift */,
+				C04A811D2855D8B90093E4D9 /* ApodVideoView.swift */,
 			);
 			path = views;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				C04A81192854E9320093E4D9 /* ApodMediaView.swift in Sources */,
 				C07F3139284B90CF00BF2473 /* ApodDataManager.swift in Sources */,
 				C07F3147284FA27000BF2473 /* HomeView.swift in Sources */,
+				C04A811E2855D8B90093E4D9 /* ApodVideoView.swift in Sources */,
 				C0FE2CDA27AFBE4E000D35C2 /* ApodApiFetcher.swift in Sources */,
 				C0D1308827B9283E003BD124 /* ApodLocalStorage.swift in Sources */,
 			);

@@ -33,3 +33,11 @@ extension Apod: Identifiable {
         date
     }
 }
+
+// For testing purposes
+extension Apod {
+    static let testApod = Apod(copyright: nil, date: Date.now, explanation: "Test Apod",
+                               hdurl: nil, thumbnailUrl: nil,
+                               url: URL(string: "https://www.google.com")!,
+                               mediaType: .image, title: "Test Apod")
+}
