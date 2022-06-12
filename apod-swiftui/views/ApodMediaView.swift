@@ -10,39 +10,45 @@ import NukeUI
 
 struct ApodMediaView: View {
     let apod: Apod
+    @State var showVideoView = false
 
     var body: some View {
+        NavigationLink("", isActive: $showVideoView) {
+            ApodVideoView(apod: apod)
+        }.hidden()
         switch apod.mediaType {
         case .image:
             LazyImage(source: apod.url)
                 .frame(height: 300)
                 .cornerRadius(6)
-                .shadow(radius: 3)
         case.video:
-            LazyImage(source: apod.thumbnailUrl)
+            videoView
                 .frame(height: 300)
                 .cornerRadius(6)
-                .shadow(radius: 3)
                 .overlay {
                     Button {
-                        print("video tapped")
+                        showVideoView = true
                     } label: {
                         Image(systemName: "play.circle.fill")
                             .resizable()
                             .scaledToFit()
-                            .frame(height: 100)
+                            .frame(height: 48)
                     }
                 }
+        }
+    }
+
+    @ViewBuilder private var videoView: some View {
+        if let url = apod.thumbnailUrl {
+            LazyImage(source: url)
+        } else {
+            Color.gray
         }
     }
 }
 
 struct ApodMediaView_Previews: PreviewProvider {
     static var previews: some View {
-        let apod = Apod(copyright: nil, date: Date.now, explanation: "Test Apod",
-                        hdurl: nil, thumbnailUrl: nil,
-                        url: URL(string: "https://www.google.com")!,
-                        mediaType: .image, title: "Test Apod")
-        ApodMediaView(apod: apod)
+        ApodMediaView(apod: Apod.testApod)
     }
 }
