@@ -12,10 +12,11 @@ struct DailyView: View {
     @State var date: Date = Constants.Dates.startOfDay
     @State var tmpDate: Date =  Constants.Dates.startOfDay
     @State var showDatePicker = false
+    @Binding var colors: UIImageColors?
 
     var body: some View {
         PageView(data: $date) { date, direction in
-            ApodView(date: date, direction: direction, vm: vm)
+            ApodView(date: date, direction: direction, vm: vm, colors: $colors)
         } before: { date in
             vm.apodDate(before: date)
         } after: { date in
@@ -30,7 +31,7 @@ struct DailyView: View {
                     showDatePicker = true
                 }.popover(isPresented: $showDatePicker) {
                     apodDatePicker
-                }
+                }.tint(colors?.primaryColor)
             }
         }
     }
@@ -66,6 +67,6 @@ struct DailyView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        DailyView()
+        DailyView(colors: .constant(nil))
     }
 }

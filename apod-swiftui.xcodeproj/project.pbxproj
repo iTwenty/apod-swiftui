@@ -22,6 +22,7 @@
 		C0D1308627B9206F003BD124 /* SqliteDb.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1308527B9206F003BD124 /* SqliteDb.swift */; };
 		C0D1308827B9283E003BD124 /* ApodLocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D1308727B9283E003BD124 /* ApodLocalStorage.swift */; };
 		C0E3F88D27CE42FF0046A408 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E3F88C27CE42FF0046A408 /* PageView.swift */; };
+		C0F729802855EAEE00C83596 /* UIImageColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F7297F2855EAEE00C83596 /* UIImageColors.swift */; };
 		C0FE2CA327AFACDE000D35C2 /* ApodApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE2CA227AFACDE000D35C2 /* ApodApp.swift */; };
 		C0FE2CA527AFACDE000D35C2 /* DailyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FE2CA427AFACDE000D35C2 /* DailyView.swift */; };
 		C0FE2CA727AFACDF000D35C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0FE2CA627AFACDF000D35C2 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		C0D1308527B9206F003BD124 /* SqliteDb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SqliteDb.swift; sourceTree = "<group>"; };
 		C0D1308727B9283E003BD124 /* ApodLocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodLocalStorage.swift; sourceTree = "<group>"; };
 		C0E3F88C27CE42FF0046A408 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		C0F7297F2855EAEE00C83596 /* UIImageColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageColors.swift; sourceTree = "<group>"; };
 		C0FE2C9F27AFACDE000D35C2 /* apod-swiftui.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "apod-swiftui.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0FE2CA227AFACDE000D35C2 /* ApodApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodApp.swift; sourceTree = "<group>"; };
 		C0FE2CA427AFACDE000D35C2 /* DailyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyView.swift; sourceTree = "<group>"; };
@@ -269,6 +271,7 @@
 				C0FE2CD527AFBB16000D35C2 /* Constants.swift */,
 				C0FE2CD727AFBB53000D35C2 /* Extensions.swift */,
 				C07F313C284BB4D900BF2473 /* Secrets.swift */,
+				C0F7297F2855EAEE00C83596 /* UIImageColors.swift */,
 			);
 			path = utilities;
 			sourceTree = "<group>";
@@ -421,6 +424,7 @@
 				C0D1308627B9206F003BD124 /* SqliteDb.swift in Sources */,
 				C0FE2CA527AFACDE000D35C2 /* DailyView.swift in Sources */,
 				C0FE2CD327AFBAC8000D35C2 /* Apod.swift in Sources */,
+				C0F729802855EAEE00C83596 /* UIImageColors.swift in Sources */,
 				C0FE2CA327AFACDE000D35C2 /* ApodApp.swift in Sources */,
 				C0D1308427B91FBE003BD124 /* ApodStorage.swift in Sources */,
 				C0658E632847C5CB0017FB65 /* ApodView.swift in Sources */,

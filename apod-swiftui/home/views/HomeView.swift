@@ -8,24 +8,12 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State var colors: UIImageColors?
+
     var body: some View {
-        TabView {
-            NavigationView {
-                DailyView()
-            }.tabItem {
-                Image(systemName: "globe")
-                Text("Daily")
-            }
-            Text("Favorites").font(.title)
-                .tabItem {
-                    Image(systemName: "heart")
-                    Text("Favorites")
-                }
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "gear")
-                    Text("Settings")
-                }
+        NavigationView {
+            DailyView(colors: $colors)
+                .background(colors?.backgroundColor?.ignoresSafeArea())
         }
     }
 }

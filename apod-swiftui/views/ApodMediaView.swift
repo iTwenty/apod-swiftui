@@ -11,6 +11,7 @@ import NukeUI
 struct ApodMediaView: View {
     let apod: Apod
     @State var showVideoView = false
+    @Binding var colors: UIImageColors?
 
     var body: some View {
         NavigationLink("", isActive: $showVideoView) {
@@ -19,6 +20,9 @@ struct ApodMediaView: View {
         switch apod.mediaType {
         case .image:
             LazyImage(source: apod.url)
+                .onSuccess({ response in
+                    colors = response.image.getColors()
+                })
                 .frame(height: 300)
                 .cornerRadius(6)
         case.video:
@@ -49,6 +53,6 @@ struct ApodMediaView: View {
 
 struct ApodMediaView_Previews: PreviewProvider {
     static var previews: some View {
-        ApodMediaView(apod: Apod.testApod)
+        ApodMediaView(apod: Apod.testApod, colors: .constant(nil))
     }
 }
