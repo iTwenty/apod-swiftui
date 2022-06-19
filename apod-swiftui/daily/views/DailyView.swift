@@ -33,6 +33,20 @@ struct DailyView: View {
                     apodDatePicker
                 }.tint(colors?.primaryColor)
             }
+            ToolbarItem(placement: .navigationBarTrailing) {
+                NavigationLink {
+                    SettingsView()
+                } label: {
+                    Image(systemName: "gear").tint(colors?.primaryColor)
+                }
+            }
+            ToolbarItem(placement: .navigationBarLeading) {
+                NavigationLink {
+                    Text("Favorites")
+                } label: {
+                    Image(systemName: "heart").tint(colors?.primaryColor)
+                }
+            }
         }
     }
 

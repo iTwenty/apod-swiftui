@@ -59,7 +59,7 @@ VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                                   apod.explanation,
                                   apod.url.absoluteString,
                                   apod.hdurl?.absoluteString,
-                                  apod.thumbnailUrl?.absoluteString,
+                                  apod.thumbnailUrl,
                                   apod.copyright]
             try await db.insert(insertString: insertQuery, parameters: params)
         }
@@ -139,7 +139,7 @@ DELETE FROM \(DbInfo.TableFavApods.name) WHERE \(DbInfo.TableFavApods.col_apod_d
               }
         let copyright = row[DbInfo.TableApods.col_copyright] as? String
         let hdurl = URL(string: row[DbInfo.TableApods.col_hdurl] as? String ?? "")
-        let thumbnailUrl = URL(string: row[DbInfo.TableApods.col_thumbnailUrl] as? String ?? "")
+        let thumbnailUrl = row[DbInfo.TableApods.col_thumbnailUrl] as? String ?? ""
         return Apod(copyright: copyright, date: date, explanation: explanation,
                     hdurl: hdurl, thumbnailUrl: thumbnailUrl, url: url,
                     mediaType: mediaType, title: title)

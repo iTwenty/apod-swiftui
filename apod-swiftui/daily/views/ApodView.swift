@@ -41,7 +41,7 @@ struct ApodView: View {
                     .foregroundColor(colors?.primaryColor)
                 Spacer().frame(height: 16)
                 Text(apod.explanation)
-                    .foregroundColor(colors?.detailColor)
+                    .foregroundColor(colors?.secondaryColor)
             }
         }
     }
