@@ -17,36 +17,41 @@ struct ApodMediaView: View {
         NavigationLink("", isActive: $showVideoView) {
             ApodVideoView(apod: apod)
         }.hidden()
+        mediaView
+            .frame(height: 300)
+            .padding()
+            .shadow(color: colors?.detailColor ?? .clear, radius: 3, x: 1, y: 1)
+            .shadow(color: colors?.detailColor ?? .clear, radius: 3, x: -1, y: -1)
+    }
+
+    @ViewBuilder private var mediaView: some View {
         switch apod.mediaType {
         case .image:
             LazyImage(source: apod.url)
                 .onSuccess({ response in
                     colors = response.image.getColors()
                 })
-                .frame(height: 300)
-                .cornerRadius(6)
         case.video:
-            videoView
-                .frame(height: 300)
-                .cornerRadius(6)
-                .overlay {
-                    Button {
-                        showVideoView = true
-                    } label: {
-                        Image(systemName: "play.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 48)
-                    }
-                }
+            if let url = apod.thumbnailUrl, !url.isEmpty {
+                LazyImage(source: url)
+                    .onSuccess({ response in
+                        colors = response.image.getColors()
+                    })
+                    .overlay(playButton)
+            } else {
+                Color.gray.overlay(playButton)
+            }
         }
     }
 
-    @ViewBuilder private var videoView: some View {
-        if let url = apod.thumbnailUrl {
-            LazyImage(source: url)
-        } else {
-            Color.gray
+    private var playButton: some View {
+        Button {
+            showVideoView = true
+        } label: {
+            Image(systemName: "play.circle.fill")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 48)
         }
     }
 }

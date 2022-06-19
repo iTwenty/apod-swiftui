@@ -355,6 +355,10 @@ extension UIImageColors {
         return Color(self.primary)
     }
 
+    var secondaryColor: Color? {
+        return Color(self.secondary)
+    }
+
     var detailColor: Color? {
         return Color(self.detail)
     }

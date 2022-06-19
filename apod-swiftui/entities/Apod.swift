@@ -16,7 +16,7 @@ struct Apod: Decodable {
     let date: Date
     let explanation: String
     let hdurl: URL?
-    let thumbnailUrl: URL?
+    let thumbnailUrl: String?
     let url: URL
     let mediaType: MediaType
     let title: String
