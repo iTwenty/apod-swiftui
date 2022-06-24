@@ -12,17 +12,17 @@ struct DailyView: View {
     @State var date: Date = Constants.Dates.startOfDay
     @State var tmpDate: Date =  Constants.Dates.startOfDay
     @State var showDatePicker = false
-    @Binding var colors: UIImageColors?
 
     var body: some View {
-        PageView(data: $date) { date, direction in
-            ApodView(date: date, direction: direction, vm: vm, colors: $colors)
+        PageView(data: $date) { date in
+            ApodView(date: date, vm: vm)
         } before: { date in
             vm.apodDate(before: date)
         } after: { date in
             vm.apodDate(after: date)
-        } onPageChange: { date in
+        } onPageChange: { (date, source) in
             tmpDate = date
+            vm.fetchApod(forDate: date, source: source)
         }
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
@@ -31,20 +31,20 @@ struct DailyView: View {
                     showDatePicker = true
                 }.popover(isPresented: $showDatePicker) {
                     apodDatePicker
-                }.tint(colors?.primaryColor)
+                }
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
                     SettingsView()
                 } label: {
-                    Image(systemName: "gear").tint(colors?.primaryColor)
+                    Image(systemName: "gear")
                 }
             }
             ToolbarItem(placement: .navigationBarLeading) {
                 NavigationLink {
                     Text("Favorites")
                 } label: {
-                    Image(systemName: "heart").tint(colors?.primaryColor)
+                    Image(systemName: "heart")
                 }
             }
         }
@@ -81,6 +81,6 @@ struct DailyView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        DailyView(colors: .constant(nil))
+        DailyView()
     }
 }

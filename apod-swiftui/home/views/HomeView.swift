@@ -12,8 +12,7 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
-            DailyView(colors: $colors)
-                .background(colors?.backgroundColor?.ignoresSafeArea())
+            DailyView()
         }
     }
 }

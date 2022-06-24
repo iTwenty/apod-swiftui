@@ -8,25 +8,27 @@
 import Foundation
 import SwiftUI
 
-enum PageDirection {
-    case forward
-    case reverse
+enum PageChangeSource {
+    case initial
     case direct
+    case gestureForward
+    case gestureReverse
 }
 
 struct PageView<Data: Comparable, Page: View>: UIViewControllerRepresentable {
     @Binding var data: Data
-    @ViewBuilder let pageBuilder: (Data, PageDirection) -> Page
+    @ViewBuilder let pageBuilder: (Data) -> Page
     let before: (Data) -> Data?
     let after: (Data) -> Data?
-    let onPageChange: ((Data) -> ())?
+    let onPageChange: ((Data, PageChangeSource) -> ())?
 
     func makeUIViewController(context: Context) -> UIPageViewController {
         let vc = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
-        let initialVc = PageViewController(data: data, rootView: pageBuilder(data, .reverse))
+        let initialVc = PageViewController(data: data, rootView: pageBuilder(data))
         vc.setViewControllers([initialVc], direction: .reverse, animated: false)
         vc.dataSource = context.coordinator
         vc.delegate = context.coordinator
+        onPageChange?(data, .initial)
         return vc
     }
 
@@ -42,7 +44,8 @@ struct PageView<Data: Comparable, Page: View>: UIViewControllerRepresentable {
             return
         }
         let direction: UIPageViewController.NavigationDirection = currentData > data ? .reverse : .forward
-        let initialVc = PageViewController(data: data, rootView: pageBuilder(data, .direct))
+        let initialVc = PageViewController(data: data, rootView: pageBuilder(data))
+        onPageChange?(data, .direct)
         vc.setViewControllers([initialVc], direction: direction, animated: true)
     }
 
@@ -82,7 +85,7 @@ class PageViewCoordinator<Data: Comparable, Page: View>: NSObject, UIPageViewCon
             return nil
         }
 
-        return PageViewController(data: beforeData, rootView: pageView.pageBuilder(beforeData, .reverse))
+        return PageViewController(data: beforeData, rootView: pageView.pageBuilder(beforeData))
     }
 
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -95,7 +98,7 @@ class PageViewCoordinator<Data: Comparable, Page: View>: NSObject, UIPageViewCon
             return nil
         }
 
-        return PageViewController(data: afterData, rootView: pageView.pageBuilder(afterData, .forward))
+        return PageViewController(data: afterData, rootView: pageView.pageBuilder(afterData))
     }
 
     func pageViewController(_ pageViewController: UIPageViewController,
@@ -107,6 +110,6 @@ class PageViewCoordinator<Data: Comparable, Page: View>: NSObject, UIPageViewCon
         }
         ignoreUpdate = true
         pageView.data = currentData
-        pageView.onPageChange?(currentData)
+        pageView.onPageChange?(currentData, .gestureReverse)
     }
 }
