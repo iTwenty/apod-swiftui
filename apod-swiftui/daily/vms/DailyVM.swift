@@ -17,12 +17,12 @@ enum ApodFetchStatus {
     private let apodDataManager = ApodDataManager()
     @Published var apods = [Date: ApodFetchStatus]()
 
-    func fetchApod(forDate date: Date, direction: PageDirection) {
+    func fetchApod(forDate date: Date, source: PageChangeSource) {
         if apods[date] == nil {
             Task {
                 do {
                     apods[date] = .fetching
-                    let fetchType = fetchType(date: date, direction: direction)
+                    let fetchType = fetchType(date: date, source: source)
                     let apod = try await apodDataManager.fetchApod(fetchType: fetchType)
                     apods[date] = .success(apod)
                 } catch {
@@ -58,11 +58,11 @@ enum ApodFetchStatus {
         return afterDate
     }
 
-    private func fetchType(date: Date, direction: PageDirection) -> FetchType {
-        switch direction {
-        case .forward: return .after(date: date)
-        case .reverse: return .before(date: date)
+    private func fetchType(date: Date, source: PageChangeSource) -> FetchType {
+        switch source {
+        case .initial, .gestureReverse: return .before(date: date)
         case .direct: return .middle(date: date)
+        case .gestureForward: return .after(date: date)
         }
     }
 }

@@ -10,45 +10,39 @@ import NukeUI
 
 struct ApodView: View {
     let date: Date
-    let direction: PageDirection
     @ObservedObject var vm: DailyVM
-    @Binding var colors: UIImageColors?
 
     var body: some View {
         if let status = vm.apods[date] {
             switch status {
             case .fetching:
-                ProgressView()
+                successView(Apod.placeholderApod, redact: true)
             case .success(let apod):
                 successView(apod)
-                    .padding()
-                    .background(colors?.backgroundColor)
             case .failure(let error):
                 Text(error.localizedDescription)
             }
         } else {
-            ProgressView().onAppear {
-                vm.fetchApod(forDate: date, direction: direction)
-            }
+            successView(Apod.placeholderApod, redact: true)
         }
     }
 
-    @ViewBuilder private func successView(_ apod: Apod) -> some View {
+    @ViewBuilder private func successView(_ apod: Apod, redact: Bool = false) -> some View {
         ScrollView([.vertical], showsIndicators: false) {
             VStack {
-                ApodMediaView(apod: apod, colors: $colors)
+                ApodMediaView(apod: apod)
                 Text(apod.title).font(.title)
-                    .foregroundColor(colors?.primaryColor)
                 Spacer().frame(height: 16)
                 Text(apod.explanation)
-                    .foregroundColor(colors?.secondaryColor)
             }
         }
+        .padding()
+        .redacted(reason: redact ? .placeholder : [])
     }
 }
 
 struct ApodView_Previews: PreviewProvider {
     static var previews: some View {
-        ApodView(date: Date.now, direction: .direct, vm: DailyVM(), colors: .constant(nil))
+        ApodView(date: Date.now, vm: DailyVM())
     }
 }
