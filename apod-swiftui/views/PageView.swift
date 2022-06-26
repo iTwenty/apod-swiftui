@@ -45,8 +45,9 @@ struct PageView<Data: Comparable, Page: View>: UIViewControllerRepresentable {
         }
         let direction: UIPageViewController.NavigationDirection = currentData > data ? .reverse : .forward
         let initialVc = PageViewController(data: data, rootView: pageBuilder(data))
-        onPageChange?(data, .direct)
-        vc.setViewControllers([initialVc], direction: direction, animated: true)
+        vc.setViewControllers([initialVc], direction: direction, animated: false) { completed in
+            onPageChange?(data, .direct)
+        }
     }
 
     func makeCoordinator() -> PageViewCoordinator<Data, Page> {
