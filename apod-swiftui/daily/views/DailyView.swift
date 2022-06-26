@@ -27,11 +27,9 @@ struct DailyView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Button(date.displayFormatted()) {
-                    showDatePicker = true
-                }.popover(isPresented: $showDatePicker) {
-                    apodDatePicker
-                }
+                ApodDateButton(date: $tmpDate) {
+                    date = tmpDate
+                }.fixedSize()
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 NavigationLink {
@@ -47,34 +45,6 @@ struct DailyView: View {
                     Image(systemName: "heart")
                 }
             }
-        }
-    }
-
-    private var apodDatePicker: some View {
-        VStack {
-            HStack {
-                Button("Cancel") {
-                    tmpDate = date
-                    showDatePicker = false
-                }
-                Spacer()
-                Button("Today") {
-                    date = Constants.Dates.startOfDay
-                    tmpDate = Constants.Dates.startOfDay
-                    showDatePicker = false
-                }
-                Spacer()
-                Button("Done") {
-                    date = tmpDate
-                    showDatePicker = false
-                }
-            }.padding()
-            let range = Constants.Dates.apodLaunchDate...Constants.Dates.startOfDay
-            DatePicker(selection: $tmpDate, in: range, displayedComponents: [.date]) {
-                Text(date.displayFormatted())
-            }
-            .environment(\.timeZone, Constants.Calendars.apodCalendar.timeZone)
-            .datePickerStyle(.graphical)
         }
     }
 }

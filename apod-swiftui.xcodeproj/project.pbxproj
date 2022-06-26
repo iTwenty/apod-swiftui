@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C0077D5528660CB500B3FABF /* ApodDateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0077D5428660CB500B3FABF /* ApodDateButton.swift */; };
 		C04A81172853AACC0093E4D9 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04A81162853AACC0093E4D9 /* SettingsView.swift */; };
 		C04A81192854E9320093E4D9 /* ApodMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04A81182854E9320093E4D9 /* ApodMediaView.swift */; };
 		C04A811C2854EA0B0093E4D9 /* YouTubePlayerKit in Frameworks */ = {isa = PBXBuildFile; productRef = C04A811B2854EA0B0093E4D9 /* YouTubePlayerKit */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C0077D5428660CB500B3FABF /* ApodDateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodDateButton.swift; sourceTree = "<group>"; };
 		C04A81162853AACC0093E4D9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C04A81182854E9320093E4D9 /* ApodMediaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodMediaView.swift; sourceTree = "<group>"; };
 		C04A811D2855D8B90093E4D9 /* ApodVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApodVideoView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				C0E3F88C27CE42FF0046A408 /* PageView.swift */,
+				C0077D5428660CB500B3FABF /* ApodDateButton.swift */,
 				C04A81182854E9320093E4D9 /* ApodMediaView.swift */,
 				C04A811D2855D8B90093E4D9 /* ApodVideoView.swift */,
 			);
@@ -423,6 +426,7 @@
 				C04A81172853AACC0093E4D9 /* SettingsView.swift in Sources */,
 				C0D1308627B9206F003BD124 /* SqliteDb.swift in Sources */,
 				C0FE2CA527AFACDE000D35C2 /* DailyView.swift in Sources */,
+				C0077D5528660CB500B3FABF /* ApodDateButton.swift in Sources */,
 				C0FE2CD327AFBAC8000D35C2 /* Apod.swift in Sources */,
 				C0F729802855EAEE00C83596 /* UIImageColors.swift in Sources */,
 				C0FE2CA327AFACDE000D35C2 /* ApodApp.swift in Sources */,
